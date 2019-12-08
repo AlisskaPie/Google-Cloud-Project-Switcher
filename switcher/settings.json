@@ -1,0 +1,690 @@
+{
+	"Go": {
+		"Spanner": {
+			"env_variables": [
+				{
+					"GOLANG_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"GOLANG_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"GOLANG_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Storage": {
+			"env_variables": [
+				{
+					"GOLANG_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"GOLANG_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"GOLANG_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Pubsub": {
+			"env_variables": [
+				{
+					"GOLANG_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"GOLANG_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"GOLANG_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Firestore": {
+			"env_variables": [
+				{
+					"GOLANG_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"GOLANG_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"GOLANG_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigQuery": {
+			"env_variables": [
+				{
+					"GOLANG_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"GOLANG_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"GOLANG_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigTable": {
+			"env_variables": [
+				{
+					"GOLANG_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"GOLANG_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"GOLANG_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		}
+	},
+	"Python": {
+		"Spanner": {
+			"env_variables": [
+				{
+					"PYTHON_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PYTHON_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PYTHON_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Storage": {
+			"env_variables": [
+				{
+					"PYTHON_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PYTHON_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PYTHON_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Pubsub": {
+			"env_variables": [
+				{
+					"PYTHON_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PYTHON_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PYTHON_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Firestore": {
+			"env_variables": [
+				{
+					"PYTHON_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PYTHON_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PYTHON_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigQuery": {
+			"env_variables": [
+				{
+					"PYTHON_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PYTHON_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PYTHON_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigTable": {
+			"env_variables": [
+				{
+					"PYTHON_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PYTHON_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PYTHON_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		}
+	},
+	"Java": {
+		"Spanner": {
+			"env_variables": [
+				{
+					"JAVA_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"JAVA_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Storage": {
+			"env_variables": [
+				{
+					"JAVA_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"JAVA_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Pubsub": {
+			"env_variables": [
+				{
+					"JAVA_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"JAVA_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Firestore": {
+			"env_variables": [
+				{
+					"JAVA_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"JAVA_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigQuery": {
+			"env_variables": [
+				{
+					"JAVA_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"JAVA_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigTable": {
+			"env_variables": [
+				{
+					"JAVA_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"JAVA_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		}
+	},
+	"NodeJS": {
+		"Spanner": {
+			"env_variables": [
+				{
+					"NODEJS_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"NODEJS_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"NODEJS_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Storage": {
+			"env_variables": [
+				{
+					"NODEJS_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"NODEJS_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"NODEJS_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Pubsub": {
+			"env_variables": [
+				{
+					"NODEJS_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"NODEJS_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"NODEJS_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Firestore": {
+			"env_variables": [
+				{
+					"NODEJS_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"NODEJS_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"NODEJS_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigQuery": {
+			"env_variables": [
+				{
+					"NODEJS_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"NODEJS_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"NODEJS_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigTable": {
+			"env_variables": [
+				{
+					"NODEJS_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"NODEJS_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"NODEJS_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		}
+	},
+	"PHP": {
+		"Spanner": {
+			"env_variables": [
+				{
+					"PHP_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PHP_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PHP_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Storage": {
+			"env_variables": [
+				{
+					"PHP_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PHP_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PHP_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Pubsub": {
+			"env_variables": [
+				{
+					"PHP_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PHP_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PHP_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Firestore": {
+			"env_variables": [
+				{
+					"PHP_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PHP_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PHP_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigQuery": {
+			"env_variables": [
+				{
+					"PHP_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PHP_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PHP_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigTable": {
+			"env_variables": [
+				{
+					"PHP_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"PHP_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"PHP_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		}
+	},
+	"Ruby": {
+		"Spanner": {
+			"env_variables": [
+				{
+					"RUBY_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"RUBY_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"RUBY_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Storage": {
+			"env_variables": [
+				{
+					"RUBY_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"RUBY_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"RUBY_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Pubsub": {
+			"env_variables": [
+				{
+					"RUBY_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"RUBY_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"RUBY_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Firestore": {
+			"env_variables": [
+				{
+					"RUBY_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"RUBY_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"RUBY_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigQuery": {
+			"env_variables": [
+				{
+					"RUBY_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"RUBY_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"RUBY_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigTable": {
+			"env_variables": [
+				{
+					"RUBY_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"RUBY_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"RUBY_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		}
+	},
+	"C#": {
+		"Spanner": {
+			"env_variables": [
+				{
+					"C#_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C#_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C#_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Storage": {
+			"env_variables": [
+				{
+					"C#_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C#_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C#_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Pubsub": {
+			"env_variables": [
+				{
+					"C#_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C#_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C#_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Firestore": {
+			"env_variables": [
+				{
+					"C#_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C#_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C#_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigQuery": {
+			"env_variables": [
+				{
+					"C#_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C#_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C#_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigTable": {
+			"env_variables": [
+				{
+					"C#_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C#_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C#_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		}
+	},
+	"C++": {
+		"Spanner": {
+			"env_variables": [
+				{
+					"C++_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C++_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C++_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Storage": {
+			"env_variables": [
+				{
+					"C++_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C++_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C++_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Pubsub": {
+			"env_variables": [
+				{
+					"C++_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C++_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C++_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"Firestore": {
+			"env_variables": [
+				{
+					"C++_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C++_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C++_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigQuery": {
+			"env_variables": [
+				{
+					"C++_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C++_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C++_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		},
+		"BigTable": {
+			"env_variables": [
+				{
+					"C++_KEY ": "C:/Users/KEY.json"
+				},
+				{
+					"C++_PROJECT_ID ": "PROJECT_ID"
+				},
+				{
+					"C++_CREDENTIALS": "C:/Users/CRED.json"
+				}
+			],
+			"key_file": "C:/Users/CRED.json"
+		}
+	}
+}

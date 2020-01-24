@@ -18,7 +18,7 @@ var (
 	projNum int64
 )
 
-const fileName = "switcher/settings.json"
+const fileName = "settings.json"
 
 func setEnvironment(key string, value string) error {
 	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SYSTEM\ControlSet001\Control\Session Manager\Environment`, registry.ALL_ACCESS)

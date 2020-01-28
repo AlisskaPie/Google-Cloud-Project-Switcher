@@ -68,14 +68,17 @@ func ScannerLines() error {
 	// Create map for languages and their corresponding numbers.
 	langMap := make(map[int64]string, len(lang))
 	fmt.Println("Choose number of the language:")
+	var counterLang int64
+
 	for key := range lang {
-		langNum++
-		langMap[langNum] = key
-		fmt.Printf("%d - %s\n", langNum, key)
+		counterLang++
+		langMap[counterLang] = key
+		fmt.Printf("%d - %s\n", counterLang, key)
 	}
+
 	// Read the number of language from console.
 	for scanner.Scan() {
-		langNum, err := strconv.ParseInt(scanner.Text(), 10, 0)
+		langNum, err = strconv.ParseInt(scanner.Text(), 10, 0)
 		if err != nil {
 			return errors.New("language error: cannot parse string to int")
 		}
@@ -90,15 +93,18 @@ func ScannerLines() error {
 		fmt.Fprintln(os.Stderr, "reading standard input:", err)
 		return err
 	}
+	fmt.Println(langNum)
 
 	// Create map for projects and their corresponding numbers.
 	projMap := make(map[int64]string, len(lang))
 	fmt.Println("Choose number of the project:")
 	proj := lang[langMap[langNum]].(map[string]interface{})
+	var counterProj int64
+
 	for key := range proj {
-		projNum++
-		projMap[projNum] = key
-		fmt.Printf("%d - %s\n", projNum, key)
+		counterProj++
+		projMap[counterProj] = key
+		fmt.Printf("%d - %s\n", counterProj, key)
 	}
 
 	// Read the number of projects from console for defined language.

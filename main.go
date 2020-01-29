@@ -5,7 +5,6 @@ import (
 
 	"bufio"
 	"encoding/json"
-	"errors"
 	"io/ioutil"
 	"os"
 	"strconv"
@@ -16,25 +15,36 @@ import (
 var (
 	langNum int64
 	projNum int64
+	scanner *bufio.Scanner = bufio.NewScanner(os.Stdin)
 )
 
-const fileName = "settings.json"
+const (
+	fileName         = "settings.json"
+	closeTerminalScr = "\nPress the Enter Key to terminate the console screen"
+)
 
-func setEnvironment(key string, value string) error {
+func setEnvironment(key, value string) error {
 	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SYSTEM\ControlSet001\Control\Session Manager\Environment`, registry.ALL_ACCESS)
 	if err != nil {
 		return err
 	}
 	defer k.Close()
 
+	fmt.Println(key + ": " + value)
 	return k.SetStringValue(key, value)
 }
 
 func setEnvir(env map[string]interface{}) error {
-	keys := env["env_variables"].([]interface{})
+	keys, ok := env["env_variables"].([]interface{})
+	if !ok {
+		return fmt.Errorf("setEnvir: got data of type %T, want []interface{}", env["env_variables"])
+	}
 	var err error
 	for _, key := range keys {
-		l := key.(map[string]interface{})
+		l, ok := key.(map[string]interface{})
+		if !ok {
+			return fmt.Errorf("setEnvir: got data of type %T, want map[string]interface{}", key)
+		}
 		for val, j := range l {
 			err = setEnvironment(val, j.(string))
 			if err != nil {
@@ -46,82 +56,75 @@ func setEnvir(env map[string]interface{}) error {
 }
 
 func projectSwt(projNum int64, proj map[string]interface{}, projMap map[int64]string) error {
-	env := proj[projMap[projNum]].(map[string]interface{})
+	env, ok := proj[projMap[projNum]].(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("projectSwt: got data of type %T, want map[string]interface{}", proj[projMap[projNum]])
+	}
 	return setEnvir(env)
 }
 
-// ScannerLines sets environment variables for different programming languages and Google Cloud projects.
-func ScannerLines() error {
-	// Open our jsonFile with settings.
-	jsonFile, err := os.Open(fileName)
+func createMap(input map[string]interface{}, output map[int64]string) {
+	var counter int64
+	for key := range input {
+		counter++
+		output[counter] = key
+		fmt.Printf("%d - %s\n", counter, key)
+	}
+}
+
+func scanLangAndProj(input map[string]interface{}, num int64) (int64, error) {
+	var err error
+	for scanner.Scan() {
+		num, err = strconv.ParseInt(scanner.Text(), 10, 0)
+		if err != nil {
+			return 0, fmt.Errorf("scanLangAndProj: cannot parse string to int: %+v", num)
+		}
+		if num > int64(len(input)) || num < 1 {
+			return 0, fmt.Errorf("scanLangAndProj: not from this list: %+v", num)
+		}
+		if len(scanner.Text()) >= 1 {
+			break
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintln(os.Stderr, "scanLangAndProj: reading standard input:", err)
+		return 0, err
+	}
+
+	return num, nil
+}
+
+// ScanLines sets environment variables for different programming languages
+// and Google Cloud projects.
+func ScanLines(byteFile []byte) error {
+	var lang map[string]interface{}
+	json.Unmarshal([]byte(byteFile), &lang)
+	var err error
+
+	fmt.Println("Choose number of the language:")
+	// Create map with corresponding numbers for languages.
+	langMap := make(map[int64]string, len(lang))
+	createMap(lang, langMap)
+
+	// Read the number of language from console.
+	langNum, err = scanLangAndProj(lang, langNum)
 	if err != nil {
 		return err
 	}
-	defer jsonFile.Close()
 
-	byteValue, _ := ioutil.ReadAll(jsonFile)
-
-	var lang map[string]interface{}
-	json.Unmarshal([]byte(byteValue), &lang)
-	scanner := bufio.NewScanner(os.Stdin)
-
-	// Create map for languages and their corresponding numbers.
-	langMap := make(map[int64]string, len(lang))
-	fmt.Println("Choose number of the language:")
-	var counterLang int64
-
-	for key := range lang {
-		counterLang++
-		langMap[counterLang] = key
-		fmt.Printf("%d - %s\n", counterLang, key)
-	}
-
-	// Read the number of language from console.
-	for scanner.Scan() {
-		langNum, err = strconv.ParseInt(scanner.Text(), 10, 0)
-		if err != nil {
-			return errors.New("language error: cannot parse string to int")
-		}
-		if langNum > int64(len(lang)) || langNum < 1 {
-			return errors.New("language error: not from this list")
-		}
-		if len(scanner.Text()) >= 1 {
-			break
-		}
-	}
-	if err := scanner.Err(); err != nil {
-		fmt.Fprintln(os.Stderr, "reading standard input:", err)
-		return err
-	}
-	fmt.Println(langNum)
-
-	// Create map for projects and their corresponding numbers.
-	projMap := make(map[int64]string, len(lang))
 	fmt.Println("Choose number of the project:")
-	proj := lang[langMap[langNum]].(map[string]interface{})
-	var counterProj int64
-
-	for key := range proj {
-		counterProj++
-		projMap[counterProj] = key
-		fmt.Printf("%d - %s\n", counterProj, key)
+	// Create map with corresponding numbers for projects.
+	proj, ok := lang[langMap[langNum]].(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("ScanLines: got data of type %T, want map[string]interface{}", lang[langMap[langNum]])
 	}
+	projMap := make(map[int64]string, len(lang))
+	createMap(proj, projMap)
 
 	// Read the number of projects from console for defined language.
-	for scanner.Scan() {
-		projNum, err = strconv.ParseInt(scanner.Text(), 10, 0)
-		if err != nil {
-			return errors.New("project error: cannot parse string to int")
-		}
-		if projNum > int64(len(projMap)) || projNum < 1 {
-			return errors.New("project error: not from this list")
-		}
-		if len(scanner.Text()) >= 1 {
-			break
-		}
-	}
-	if err := scanner.Err(); err != nil {
-		fmt.Fprintln(os.Stderr, "reading standard input:", err)
+	projNum, err = scanLangAndProj(proj, projNum)
+	if err != nil {
 		return err
 	}
 
@@ -129,10 +132,24 @@ func ScannerLines() error {
 }
 
 func main() {
-	errSc := ScannerLines()
-	if errSc != nil {
-		fmt.Println(errSc)
+	// Open jsonFile with settings.
+	jsonFile, err := os.Open(fileName)
+	if err != nil {
+		fmt.Println("Open: cannot open setting's file", err)
+	}
+	defer jsonFile.Close()
+
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		fmt.Println("ReadAll: cannot read from jsonFile", err)
+	}
+
+	err = ScanLines(byteValue)
+	if err != nil {
+		fmt.Println(err, closeTerminalScr)
+		fmt.Scanln()
 	} else {
-		fmt.Println("Successfully set")
+		fmt.Println("Successfully set", closeTerminalScr)
+		fmt.Scanln()
 	}
 }

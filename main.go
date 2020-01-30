@@ -114,11 +114,11 @@ func main() {
 	var lang map[string]interface{}
 	json.Unmarshal([]byte(byteValue), &lang)
 
-	// First part - pragramming language.
 	fmt.Println("Choose number of the language:")
 	// Create map with corresponding numbers for languages.
 	langMap := make(map[int64]string, len(lang))
 	createMap(lang, langMap)
+
 	// Read the number of language from console.
 	langNum, err = scanLangAndProj(lang, langNum)
 	if err != nil {
@@ -127,18 +127,19 @@ func main() {
 		return
 	}
 
-	// Second part - Google Cloud Project.
 	fmt.Println("Choose number of the project:")
 	// Create map with corresponding numbers for projects.
 	proj, ok := lang[langMap[langNum]].(map[string]interface{})
 	if !ok {
-		log.Printf("got data of type %T, want map[string]interface{}", lang[langMap[langNum]])
-		log.Println(closeTerminalScr)
+		log.Printf("got data of type %T, want map[string]interface{}"+closeTerminalScr, lang[langMap[langNum]])
 		fmt.Scanln()
 		return
 	}
+
+	// Create map with corresponding numbers for projects.
 	projMap := make(map[int64]string, len(lang))
 	createMap(proj, projMap)
+
 	// Read the number of projects from console for defined language.
 	projNum, err = scanLangAndProj(proj, projNum)
 	if err != nil {

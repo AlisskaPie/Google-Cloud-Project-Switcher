@@ -1,7 +1,11 @@
+// This program sets environment variables for different programming languages
+// and Google Cloud projects.
 package main
 
 import (
 	"fmt"
+	"log"
+	"strings"
 
 	"bufio"
 	"encoding/json"
@@ -30,7 +34,7 @@ func setEnvironment(key, value string) error {
 	}
 	defer k.Close()
 
-	fmt.Println(key + ": " + value)
+	fmt.Println(strings.TrimSpace(key) + " = " + strings.TrimSpace(value))
 	return k.SetStringValue(key, value)
 }
 
@@ -77,74 +81,74 @@ func scanLangAndProj(input map[string]interface{}, num int64) (int64, error) {
 	for scanner.Scan() {
 		num, err = strconv.ParseInt(scanner.Text(), 10, 0)
 		if err != nil {
-			return 0, fmt.Errorf("scanLangAndProj: cannot parse string to int: %+v", num)
+			return 0, fmt.Errorf("cannot parse string %v to int", scanner.Text())
 		}
 		if num > int64(len(input)) || num < 1 {
-			return 0, fmt.Errorf("scanLangAndProj: not from this list: %+v", num)
+			return 0, fmt.Errorf("not from this list: [1, %v]", len(input))
 		}
 		if len(scanner.Text()) >= 1 {
 			break
 		}
 	}
-
-	if err := scanner.Err(); err != nil {
-		fmt.Fprintln(os.Stderr, "scanLangAndProj: reading standard input:", err)
-		return 0, err
-	}
-
-	return num, nil
-}
-
-// ScanLines sets environment variables for different programming languages
-// and Google Cloud projects.
-func ScanLines(byteFile []byte) error {
-	var lang map[string]interface{}
-	json.Unmarshal([]byte(byteFile), &lang)
-	var err error
-
-	fmt.Println("Choose number of the language:")
-	// Create map with corresponding numbers for languages.
-	langMap := make(map[int64]string, len(lang))
-	createMap(lang, langMap)
-
-	// Read the number of language from console.
-	langNum, err = scanLangAndProj(lang, langNum)
-	if err != nil {
-		return err
-	}
-
-	fmt.Println("Choose number of the project:")
-	// Create map with corresponding numbers for projects.
-	proj, ok := lang[langMap[langNum]].(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("ScanLines: got data of type %T, want map[string]interface{}", lang[langMap[langNum]])
-	}
-	projMap := make(map[int64]string, len(lang))
-	createMap(proj, projMap)
-
-	// Read the number of projects from console for defined language.
-	projNum, err = scanLangAndProj(proj, projNum)
-	if err != nil {
-		return err
-	}
-
-	return projectSwt(projNum, proj, projMap)
+	err = scanner.Err()
+	return num, err
 }
 
 func main() {
 	// Open jsonFile with settings.
 	jsonFile, err := os.Open(fileName)
 	if err != nil {
-		fmt.Println("Open: cannot open setting's file", err)
+		log.Println("Open: cannot open setting's file: ", err, closeTerminalScr)
+		fmt.Scanln()
+		return
 	}
 	defer jsonFile.Close()
 
 	byteValue, err := ioutil.ReadAll(jsonFile)
 	if err != nil {
-		fmt.Println("ReadAll: cannot read from jsonFile", err)
+		log.Println("ReadAll: cannot read from jsonFile: ", err, closeTerminalScr)
+		fmt.Scanln()
+		return
 	}
 
-	err = ScanLines(byteValue)
+	var lang map[string]interface{}
+	json.Unmarshal([]byte(byteValue), &lang)
+
+	// First part - pragramming language.
+	fmt.Println("Choose number of the language:")
+	// Create map with corresponding numbers for languages.
+	langMap := make(map[int64]string, len(lang))
+	createMap(lang, langMap)
+	// Read the number of language from console.
+	langNum, err = scanLangAndProj(lang, langNum)
+	if err != nil {
+		log.Println("scanLangAndProj: reading standard input:", err, closeTerminalScr)
+		fmt.Scanln()
+		return
+	}
+
+	// Second part - Google Cloud Project.
+	fmt.Println("Choose number of the project:")
+	// Create map with corresponding numbers for projects.
+	proj, ok := lang[langMap[langNum]].(map[string]interface{})
+	if !ok {
+		log.Printf("got data of type %T, want map[string]interface{}", lang[langMap[langNum]])
+		log.Println(closeTerminalScr)
+		fmt.Scanln()
+		return
+	}
+	projMap := make(map[int64]string, len(lang))
+	createMap(proj, projMap)
+	// Read the number of projects from console for defined language.
+	projNum, err = scanLangAndProj(proj, projNum)
+	if err != nil {
+		log.Println("scanLangAndProj: reading standard input:", err, closeTerminalScr)
+		fmt.Scanln()
+		return
+	}
+
+	// Add variables to environment.
+	err = projectSwt(projNum, proj, projMap)
 	if err != nil {
 		fmt.Println(err, closeTerminalScr)
 		fmt.Scanln()

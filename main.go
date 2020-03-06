@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"log"
 	"strings"
+	"syscall"
+	"unsafe"
 
 	"bufio"
 	"encoding/json"
@@ -23,12 +25,14 @@ var (
 )
 
 const (
-	fileName         = "settings.json"
+	fileName         = "settings_secretFileName.json"
 	closeTerminalScr = "\nPress the Enter Key to terminate the console screen"
+	HWND_BROADCAST   = uintptr(0xffff)
+	WM_SETTINGCHANGE = uintptr(0x001A)
 )
 
 func setEnvironment(key, value string) error {
-	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SYSTEM\ControlSet001\Control\Session Manager\Environment`, registry.ALL_ACCESS)
+	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SYSTEM\ControlSet001\Control\Session Manager\Environment`, registry.SET_VALUE)
 	if err != nil {
 		return err
 	}
@@ -147,6 +151,8 @@ func main() {
 		fmt.Scanln()
 		return
 	}
+
+	syscall.NewLazyDLL("user32.dll").NewProc("SendMessageW").Call(HWND_BROADCAST, WM_SETTINGCHANGE, 0, uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("ENVIRONMENT"))))
 
 	// Add variables to environment.
 	err = projectSwt(projNum, proj, projMap)

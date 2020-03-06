@@ -1,2 +1,3 @@
 *.exe
 *.exe~
+switcher_unix.go

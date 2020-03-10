@@ -152,14 +152,13 @@ func main() {
 		return
 	}
 
-	syscall.NewLazyDLL("user32.dll").NewProc("SendMessageW").Call(HWND_BROADCAST, WM_SETTINGCHANGE, 0, uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("ENVIRONMENT"))))
-
 	// Add variables to environment.
 	err = projectSwt(projNum, proj, projMap)
 	if err != nil {
 		fmt.Println(err, closeTerminalScr)
 		fmt.Scanln()
 	} else {
+		syscall.NewLazyDLL("user32.dll").NewProc("SendMessageW").Call(HWND_BROADCAST, WM_SETTINGCHANGE, 0, uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("ENVIRONMENT"))))
 		fmt.Println("Successfully set", closeTerminalScr)
 		fmt.Scanln()
 	}

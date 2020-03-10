@@ -32,7 +32,7 @@ const (
 )
 
 func setEnvironment(key, value string) error {
-	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SYSTEM\ControlSet001\Control\Session Manager\Environment`, registry.SET_VALUE)
+	k, err := registry.OpenKey(registry.CURRENT_USER, `Environment`, registry.SET_VALUE)
 	if err != nil {
 		return err
 	}

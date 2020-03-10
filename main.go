@@ -25,7 +25,7 @@ var (
 )
 
 const (
-	fileName         = "settings_secretFileName.json"
+	fileName         = "settings.json"
 	closeTerminalScr = "\nPress the Enter Key to terminate the console screen"
 	HWND_BROADCAST   = uintptr(0xffff)
 	WM_SETTINGCHANGE = uintptr(0x001A)

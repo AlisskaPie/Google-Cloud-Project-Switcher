@@ -11,8 +11,7 @@
 				{
 					"GOLANG_CREDENTIALS": "C:/Users/CRED.json"
 				}
-			],
-			"key_file": "C:/Users/CRED.json"
+			]
 		},
 		"Firestore": {
 			"env_variables": [
@@ -25,8 +24,7 @@
 				{
 					"GOLANG_CREDENTIALS": "C:/Users/CRED.json"
 				}
-			],
-			"key_file": "C:/Users/CRED.json"
+			]
 		}
 	},
 	"Python": {
@@ -41,8 +39,7 @@
 				{
 					"PYTHON_CREDENTIALS": "C:/Users/CRED.json"
 				}
-			],
-			"key_file": "C:/Users/CRED.json"
+			]
 		},
 		"Firestore": {
 			"env_variables": [
@@ -55,8 +52,7 @@
 				{
 					"PYTHON_CREDENTIALS": "C:/Users/CRED.json"
 				}
-			],
-			"key_file": "C:/Users/CRED.json"
+			]
 		}
 	},
 	"Java": {
@@ -71,8 +67,7 @@
 				{
 					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
 				}
-			],
-			"key_file": "C:/Users/CRED.json"
+			]
 		},
 		"Firestore": {
 			"env_variables": [
@@ -85,8 +80,7 @@
 				{
 					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
 				}
-			],
-			"key_file": "C:/Users/CRED.json"
+			]
 		}
 	}
 }

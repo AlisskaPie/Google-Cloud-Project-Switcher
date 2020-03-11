@@ -1,3 +1,5 @@
 *.exe
 *.exe~
-switcher_unix.go
+*.txt
+*.tar.gz
+switcher_linux_amd64

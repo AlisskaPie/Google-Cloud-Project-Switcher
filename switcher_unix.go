@@ -1,19 +1,19 @@
 // This program sets environment variables for different programming languages
 // and Google Cloud projects.
+// +build linux
+
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
+	"strconv"
 	"strings"
 
 	"bufio"
-	"encoding/json"
-	"io/ioutil"
 	"os"
-	"strconv"
-
-	"golang.org/x/sys/windows/registry"
 )
 
 var (
@@ -27,35 +27,15 @@ const (
 	closeTerminalScr = "\nPress the Enter Key to terminate the console screen"
 )
 
-func setEnvironment(key, value string) error {
-	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SYSTEM\ControlSet001\Control\Session Manager\Environment`, registry.ALL_ACCESS)
+func setEnvironment(bashFile *os.File, key, value string) error {
+	// write string in .bashrc with key and value
+	stringKeyWithValue := strings.TrimSpace(key) + " = " + strings.TrimSpace(value)
+
+	_, err := bashFile.WriteString(stringKeyWithValue)
 	if err != nil {
-		return err
+		return fmt.Errorf("bashFile.WriteString: %v", err)
 	}
-	defer k.Close()
-
-	fmt.Println(strings.TrimSpace(key) + " = " + strings.TrimSpace(value))
-	return k.SetStringValue(key, value)
-}
-
-func setEnvir(env map[string]interface{}) error {
-	keys, ok := env["env_variables"].([]interface{})
-	if !ok {
-		return fmt.Errorf("setEnvir: got data of type %T, want []interface{}", env["env_variables"])
-	}
-	var err error
-	for _, key := range keys {
-		l, ok := key.(map[string]interface{})
-		if !ok {
-			return fmt.Errorf("setEnvir: got data of type %T, want map[string]interface{}", key)
-		}
-		for val, j := range l {
-			err = setEnvironment(val, j.(string))
-			if err != nil {
-				return err
-			}
-		}
-	}
+	fmt.Println(stringKeyWithValue)
 	return nil
 }
 
@@ -64,7 +44,45 @@ func projectSwt(projNum int64, proj map[string]interface{}, projMap map[int64]st
 	if !ok {
 		return fmt.Errorf("projectSwt: got data of type %T, want map[string]interface{}", proj[projMap[projNum]])
 	}
+
 	return setEnvir(env)
+}
+
+func setEnvir(env map[string]interface{}) error {
+	keys, ok := env["env_variables"].([]interface{})
+	if !ok {
+		return fmt.Errorf("setEnvir: got data of type %T, want []interface{}", env["env_variables"])
+	}
+	var err error
+	// open .bashrc, or create if it doesn't exist.
+	bashrc, err := os.Open("$HOME/.bashrc")
+	if err != nil {
+		log.Println("bashrc.Open: no such .bashrc file, creating new")
+		bashrc, err = os.Create("$HOME/.bashrc")
+		if err != nil {
+			return fmt.Errorf("bashrc.Create: cannot create .bashrc file")
+		}
+		return nil
+	}
+
+	for _, key := range keys {
+		l, ok := key.(map[string]interface{})
+		if !ok {
+			return fmt.Errorf("setEnvir: got data of type %T, want map[string]interface{}", key)
+		}
+		for val, j := range l {
+			err = setEnvironment(bashrc, val, j.(string))
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// save file
+	err = bashrc.Close()
+	if err != nil {
+		return fmt.Errorf("bashrc.Close(): cannot close bashrc file: %v", err)
+	}
+	return nil
 }
 
 func createMap(input map[string]interface{}, output map[int64]string) {

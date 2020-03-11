@@ -1,10 +1,12 @@
 // This program sets environment variables for different programming languages
 // and Google Cloud projects.
+
 package main
 
 import (
 	"fmt"
 	"log"
+	"strconv"
 	"strings"
 	"syscall"
 	"unsafe"
@@ -13,7 +15,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
-	"strconv"
 
 	"golang.org/x/sys/windows/registry"
 )

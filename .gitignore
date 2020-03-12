@@ -3,3 +3,5 @@
 *.txt
 *.tar.gz
 switcher_linux_amd64
+switcher_darwin_amd64
+*.tar

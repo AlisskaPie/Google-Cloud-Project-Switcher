@@ -140,7 +140,7 @@ func main() {
 	var lang map[string]interface{}
 	json.Unmarshal([]byte(byteValue), &lang)
 
-	fmt.Println("Choose number of the language:")
+	fmt.Println("\nChoose number of the language:")
 	// Create map with corresponding numbers for languages.
 	langMap := make(map[int64]string, len(lang))
 	createMap(lang, langMap)

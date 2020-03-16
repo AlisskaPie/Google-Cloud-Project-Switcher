@@ -32,6 +32,13 @@ const (
 	WM_SETTINGCHANGE = uintptr(0x001A)
 )
 
+func printCurrentEnvSettings() {
+	fmt.Println("List of current environment variables:")
+	for index, pair := range os.Environ() {
+		fmt.Printf("%v. %v\n", index+1, pair)
+	}
+}
+
 func setEnvironment(key, value string) error {
 	k, err := registry.OpenKey(registry.CURRENT_USER, `Environment`, registry.SET_VALUE)
 	if err != nil {
@@ -100,6 +107,8 @@ func scanLangAndProj(input map[string]interface{}, num int64) (int64, error) {
 }
 
 func main() {
+	printCurrentEnvSettings()
+
 	// Open jsonFile with settings.
 	jsonFile, err := os.Open(fileName)
 	if err != nil {
@@ -119,7 +128,7 @@ func main() {
 	var lang map[string]interface{}
 	json.Unmarshal([]byte(byteValue), &lang)
 
-	fmt.Println("Choose number of the language:")
+	fmt.Println("\nChoose number of the language:")
 	// Create map with corresponding numbers for languages.
 	langMap := make(map[int64]string, len(lang))
 	createMap(lang, langMap)

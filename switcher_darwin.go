@@ -27,6 +27,13 @@ const (
 	closeTerminalScr = "\nPress the Enter Key to terminate the console screen"
 )
 
+func printCurrentEnvSettings() {
+	fmt.Println("List of current environment variables:")
+	for index, pair := range os.Environ() {
+		fmt.Printf(" %v. %v\n", index+1, pair)
+	}
+}
+
 func setEnvironment(bashFile *os.File, key, value string) error {
 	// write string in .profile with key and value
 	stringKeyWithValue := strings.TrimSpace(key) + " = " + strings.TrimSpace(value)
@@ -113,6 +120,8 @@ func scanLangAndProj(input map[string]interface{}, num int64) (int64, error) {
 }
 
 func main() {
+	printCurrentEnvSettings()
+
 	// Open jsonFile with settings.
 	jsonFile, err := os.Open(fileName)
 	if err != nil {

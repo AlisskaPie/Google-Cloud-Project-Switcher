@@ -27,6 +27,7 @@ const (
 	closeTerminalScr = "\nPress the Enter Key to terminate the console screen"
 )
 
+// TODO: need to print only specified variables.
 func printCurrentEnvSettings() {
 	fmt.Println("List of current environment variables:")
 	for index, pair := range os.Environ() {
@@ -35,14 +36,14 @@ func printCurrentEnvSettings() {
 }
 
 func setEnvironment(bashFile *os.File, key, value string) error {
-	// write string in .bashrc with key and value
-	stringKeyWithValue := strings.TrimSpace(key) + " = " + strings.TrimSpace(value)
+	// Write string in .profile with key and value.
+	stringKeyWithValue := "export " + strings.TrimSpace(key) + "=" + strings.TrimSpace(value) + "\n"
 
 	_, err := bashFile.WriteString(stringKeyWithValue)
 	if err != nil {
 		return fmt.Errorf("bashFile.WriteString: %v", err)
 	}
-	fmt.Println(stringKeyWithValue)
+	fmt.Print(stringKeyWithValue)
 	return nil
 }
 
@@ -61,15 +62,17 @@ func setEnvir(env map[string]interface{}) error {
 		return fmt.Errorf("setEnvir: got data of type %T, want []interface{}", env["env_variables"])
 	}
 	var err error
-	// open .bashrc, or create if it doesn't exist.
-	bashrc, err := os.Open("$HOME/.bashrc")
+
+	// Get home directory.
+	homeDir, err := os.UserHomeDir()
 	if err != nil {
-		log.Println("bashrc.Open: no such .bashrc file, creating new")
-		bashrc, err = os.Create("$HOME/.bashrc")
-		if err != nil {
-			return fmt.Errorf("bashrc.Create: cannot create .bashrc file")
-		}
-		return nil
+		return fmt.Errorf("os.UserHomeDir: %v", err)
+	}
+
+	// Open .profile, or create if it doesn't exist.
+	profile, err := os.OpenFile(homeDir+"/.profile", os.O_CREATE|os.O_WRONLY|os.O_APPEND, os.ModeAppend)
+	if err != nil {
+		return fmt.Errorf("os.OpenFile: unexpected error: %v", err)
 	}
 
 	for _, key := range keys {
@@ -78,16 +81,16 @@ func setEnvir(env map[string]interface{}) error {
 			return fmt.Errorf("setEnvir: got data of type %T, want map[string]interface{}", key)
 		}
 		for val, j := range l {
-			err = setEnvironment(bashrc, val, j.(string))
+			err = setEnvironment(profile, val, j.(string))
 			if err != nil {
 				return err
 			}
 		}
 	}
-	// save file
-	err = bashrc.Close()
+	// Save file.
+	err = profile.Close()
 	if err != nil {
-		return fmt.Errorf("bashrc.Close(): cannot close bashrc file: %v", err)
+		return fmt.Errorf("profile.Close(): cannot close profile file: %v", err)
 	}
 	return nil
 }
@@ -120,7 +123,7 @@ func scanLangAndProj(input map[string]interface{}, num int64) (int64, error) {
 }
 
 func main() {
-	printCurrentEnvSettings()
+	// TODO: printCurrentEnvSettings()
 	// Open jsonFile with settings.
 	jsonFile, err := os.Open(fileName)
 	if err != nil {
@@ -138,7 +141,12 @@ func main() {
 	}
 
 	var lang map[string]interface{}
-	json.Unmarshal([]byte(byteValue), &lang)
+	err = json.Unmarshal([]byte(byteValue), &lang)
+	if err != nil {
+		log.Printf("json.Unmarshal: convertation error: %v", err)
+		fmt.Scanln()
+		return
+	}
 
 	fmt.Println("\nChoose number of the language:")
 	// Create map with corresponding numbers for languages.
@@ -180,7 +188,8 @@ func main() {
 		fmt.Println(err, closeTerminalScr)
 		fmt.Scanln()
 	} else {
-		fmt.Println("Successfully set", closeTerminalScr)
+		fmt.Println("\nSuccesfully wrote variables to $HOME/.profile file.")
+		fmt.Println("To apply changes execute them using a command: source $HOME/.profile.\n", closeTerminalScr)
 		fmt.Scanln()
 	}
 }

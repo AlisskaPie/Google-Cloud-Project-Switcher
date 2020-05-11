@@ -35,8 +35,20 @@ func printCurrentEnvSettings() {
 	}
 }
 
+// Check if key already exists. If true, replace the old key with a new one.
+func checkExistingKey(key string) bool {
+	ok, keyExist := os.LookupEnv(strings.TrimSpace(key))
+	if keyExist {
+		// TODO unset or delete from file.
+		fmt.Printf("variable %v was set as %v\n", strings.TrimSpace(key), strings.TrimSpace(ok))
+		return true
+	}
+	return false
+}
+
 func setEnvironment(bashFile *os.File, key, value string) error {
 	// Write string in .profile with key and value.
+	checkExistingKey(key)
 	stringKeyWithValue := "export " + strings.TrimSpace(key) + "=" + strings.TrimSpace(value) + "\n"
 
 	_, err := bashFile.WriteString(stringKeyWithValue)

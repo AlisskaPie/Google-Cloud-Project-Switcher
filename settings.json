@@ -59,26 +59,26 @@
 		"Spanner": {
 			"env_variables": [
 				{
-					"JAVA_KEY ": "C:/Users/KEY.json"
+					"JAVA_KEY ": "C:/Users/KEY1.json"
 				},
 				{
-					"JAVA_PROJECT_ID ": "PROJECT_ID"
+					"JAVA_PROJECT_ID ": "PROJECT_ID1"
 				},
 				{
-					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
+					"JAVA_CREDENTIALS": "C:/Users/CRED1.json"
 				}
 			]
 		},
 		"Firestore": {
 			"env_variables": [
 				{
-					"JAVA_KEY ": "C:/Users/KEY.json"
+					"JAVA_KEY ": "C:/Users/KEY2.json"
 				},
 				{
-					"JAVA_PROJECT_ID ": "PROJECT_ID"
+					"JAVA_PROJECT_ID ": "PROJECT_ID2"
 				},
 				{
-					"JAVA_CREDENTIALS": "C:/Users/CRED.json"
+					"JAVA_CREDENTIALS": "C:/Users/CRED2.json"
 				}
 			]
 		}
